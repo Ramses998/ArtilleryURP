@@ -14507,7 +14507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30967564c3a754490bcb88d045e98cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipDisparo: {fileID: 8300000, guid: b66222ded2f124e8eb921c06dafb2ba7, type: 3}
+  clipDisparo: {fileID: 8300000, guid: c3398ccd6cd224b418fca2e04344f6c8, type: 3}
   BalaPrefab: {fileID: 6961510889147732064, guid: 66c4537cb572e478399a37fb9d6d1a76, type: 3}
   ParticulasDisparo: {fileID: 3899753443630745582, guid: 14441c5ad64ef46749b00714e1669c1b, type: 3}
 --- !u!1001 &1810876442

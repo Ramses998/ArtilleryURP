@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7531796426294339507}
   - component: {fileID: 7531796426294339506}
   m_Layer: 0
-  m_Name: Particulas_Explosion
+  m_Name: Particulas_Explosion2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1548,8 +1548,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 6
-    tilesY: 6
+    tilesX: 8
+    tilesY: 8
     animationType: 0
     rowIndex: 0
     cycles: 1
@@ -4834,7 +4834,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e3114c5d621a49f68dee5e794fdf001, type: 2}
+  - {fileID: 2100000, guid: 602f0e24c9907442f9fc5826ec61fcfd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
