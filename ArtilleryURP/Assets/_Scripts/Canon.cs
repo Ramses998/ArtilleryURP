@@ -69,7 +69,9 @@ public class Canon : MonoBehaviour
 
     void Update()
     {
-        rotacion += apuntar.ReadValue<float>() * AdministradorJuego.VelocidadRotacion;
+        if (!Bloqueado) {
+            rotacion += apuntar.ReadValue<float>() * AdministradorJuego.VelocidadRotacion;
+        } 
         if (rotacion <= 90 && !Bloqueado) {
             transform.eulerAngles = new Vector3(rotacion, 90, 0.0f);
         }
