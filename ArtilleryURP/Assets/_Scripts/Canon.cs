@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Canon : MonoBehaviour
 {
+    [SerializeField] PauseManager pauseManager;
     public static bool Bloqueado;
 
     public AudioClip clipDisparo;
@@ -54,8 +55,14 @@ public class Canon : MonoBehaviour
         bajar.performed += Bajar;
     }
 
+    private void OnDisable()
+    {
+        disparar.Disable();
+    }
+
     private void Start()
     {
+        Bloqueado = false;
         velocidadSlider = FindObjectOfType<Slider>();
         puntaCanon = transform.Find("PuntaCanon").gameObject;
         SonidoDisparo = GameObject.Find("SonidoDisparo");
@@ -65,26 +72,34 @@ public class Canon : MonoBehaviour
         if (!opciones.musica) {
             musica.mute = true;
         }
+
+        AdministradorJuego.DisparosPorJuego = 3;
+        AdministradorJuego.matchEnded = false;
     }
 
     void Update()
     {
-        if (!Bloqueado) {
-            rotacion += apuntar.ReadValue<float>() * AdministradorJuego.VelocidadRotacion;
-        } 
-        if (rotacion <= 90 && !Bloqueado) {
-            transform.eulerAngles = new Vector3(rotacion, 90, 0.0f);
+        if (!AdministradorJuego.matchEnded) {
+            if (!Bloqueado)
+            {
+                rotacion += apuntar.ReadValue<float>() * AdministradorJuego.VelocidadRotacion;
+            }
+            if (rotacion <= 90 && !Bloqueado && !pauseManager.isPaused)
+            {
+                transform.eulerAngles = new Vector3(rotacion, 90, 0.0f);
+            }
+
+            if (rotacion > 90) rotacion = 90;
+            if (rotacion < 0) rotacion = 0;
+
+            //velocidadSlider.value += modificarFuerza.ReadValue<float>();
         }
 
-        if (rotacion > 90) rotacion = 90;
-        if (rotacion < 0) rotacion = 0;
-
-        //velocidadSlider.value += modificarFuerza.ReadValue<float>();
     }
 
     private void Disparar(InputAction.CallbackContext context)
     {
-        if (!Bloqueado) {
+        if (!Bloqueado && !pauseManager.isPaused && !AdministradorJuego.matchEnded) {
             velocidad = 4 * (int)velocidadSlider.value;
             GameObject temp = Instantiate(BalaPrefab, puntaCanon.transform.position, transform.rotation);
             Rigidbody tempRB = temp.GetComponent<Rigidbody>();

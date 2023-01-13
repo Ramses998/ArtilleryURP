@@ -12,6 +12,8 @@ public class AdministradorJuego : MonoBehaviour
     public GameObject CanvasGanar;
     public GameObject CanvasPerder;
 
+    public static bool matchEnded = false;
+
     private void Awake()
     {
         if (SingletonAdministradorJuego == null)
@@ -33,10 +35,12 @@ public class AdministradorJuego : MonoBehaviour
 
     public void GanarJuego() {
         CanvasGanar.SetActive(true);
+        matchEnded = true;
     }
 
     public void PerderJuego() {
         CanvasPerder.SetActive(true);
+        matchEnded = true;
     }
 
 }

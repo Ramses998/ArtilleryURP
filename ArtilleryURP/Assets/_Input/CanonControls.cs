@@ -80,6 +80,15 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pausa"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9849661-38e5-49c9-aab0-e1da68ae7e20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -335,6 +344,28 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
                     ""action"": ""Bajar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""505ea28a-70cc-4820-9ad8-6746f80f9991"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausa"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b163191-6de6-4e3a-ad7f-bd585edc1758"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausa"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -366,6 +397,7 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
         m_Canon_Move = m_Canon.FindAction("Move", throwIfNotFound: true);
         m_Canon_Subir = m_Canon.FindAction("Subir", throwIfNotFound: true);
         m_Canon_Bajar = m_Canon.FindAction("Bajar", throwIfNotFound: true);
+        m_Canon_Pausa = m_Canon.FindAction("Pausa", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -431,6 +463,7 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Canon_Move;
     private readonly InputAction m_Canon_Subir;
     private readonly InputAction m_Canon_Bajar;
+    private readonly InputAction m_Canon_Pausa;
     public struct CanonActions
     {
         private @CanonControls m_Wrapper;
@@ -441,6 +474,7 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Canon_Move;
         public InputAction @Subir => m_Wrapper.m_Canon_Subir;
         public InputAction @Bajar => m_Wrapper.m_Canon_Bajar;
+        public InputAction @Pausa => m_Wrapper.m_Canon_Pausa;
         public InputActionMap Get() { return m_Wrapper.m_Canon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -468,6 +502,9 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
                 @Bajar.started -= m_Wrapper.m_CanonActionsCallbackInterface.OnBajar;
                 @Bajar.performed -= m_Wrapper.m_CanonActionsCallbackInterface.OnBajar;
                 @Bajar.canceled -= m_Wrapper.m_CanonActionsCallbackInterface.OnBajar;
+                @Pausa.started -= m_Wrapper.m_CanonActionsCallbackInterface.OnPausa;
+                @Pausa.performed -= m_Wrapper.m_CanonActionsCallbackInterface.OnPausa;
+                @Pausa.canceled -= m_Wrapper.m_CanonActionsCallbackInterface.OnPausa;
             }
             m_Wrapper.m_CanonActionsCallbackInterface = instance;
             if (instance != null)
@@ -490,6 +527,9 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
                 @Bajar.started += instance.OnBajar;
                 @Bajar.performed += instance.OnBajar;
                 @Bajar.canceled += instance.OnBajar;
+                @Pausa.started += instance.OnPausa;
+                @Pausa.performed += instance.OnPausa;
+                @Pausa.canceled += instance.OnPausa;
             }
         }
     }
@@ -511,5 +551,6 @@ public partial class @CanonControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnSubir(InputAction.CallbackContext context);
         void OnBajar(InputAction.CallbackContext context);
+        void OnPausa(InputAction.CallbackContext context);
     }
 }
